@@ -1,0 +1,468 @@
+/* Estilos generales para todos los temas */
+
+/* Asegura que el contenedor principal ocupe toda la altura */
+html,
+body {
+    height: 100%;
+    margin: 0;
+    padding: 0;
+    display: flex;
+    flex-direction: column;
+}
+
+/* El contenido principal ocupa el espacio restante */
+.content {
+    flex: 1;
+}
+
+/* Estilos generales para body */
+body {
+    font-family: 'Arial', sans-serif;
+    transition: background-color 0.3s, color 0.3s;
+}
+
+/* Estilo para el header */
+.header {
+    background-color: #222;
+    /* Fondo oscuro */
+    padding: 15px 20px;
+    position: sticky;
+    top: 0;
+    z-index: 1000;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
+}
+
+/* Estilo para el logo dentro del nav */
+.nav-logo {
+    display: inline-block;
+    margin-right: auto;
+    width: 3%;
+    border-radius: 50%;
+}
+
+/* Estilo para la imagen del logo */
+.logo {
+    height: 40px; /* Tamaño del logo, puedes ajustarlo según lo que necesites */
+    width: auto;  /* Mantiene la proporción de la imagen */
+    display: block;
+}
+
+/* Menú de navegación */
+.nav {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 20px;
+}
+
+.nav-link {
+    color: #fff;
+    text-decoration: none;
+    font-size: 16px;
+    font-weight: bold;
+    transition: color 0.3s ease;
+}
+
+.nav-link:hover {
+    color: #FF7F32;
+}
+
+/* Estilos comunes para el texto y el fondo */
+.titulo-claro,
+.usuario-claro,
+.carrito-vacio-claro,
+.carrito-total-claro,
+.titulo-oscuro,
+.usuario-oscuro,
+.carrito-vacio-oscuro,
+.carrito-total-oscuro {
+    margin: 0;
+    padding: 0;
+}
+
+/* Estilos para los productos en la página principal */
+
+/* Contenedor de los productos */
+.productos-container {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+    gap: 30px;
+    margin: 20px;
+}
+
+/* Estilo de cada tarjeta de producto */
+.producto-card-claro,
+.producto-card-oscuro {
+    background-color: #fff;
+    border-radius: 10px;
+    padding: 15px;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+    text-align: center;
+}
+
+.producto-card-claro:hover,
+.producto-card-oscuro:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 6px 15px rgba(0, 0, 0, 0.15);
+}
+
+/* Imagen del producto */
+.producto-imagen {
+    width: 100%;
+    object-fit: cover;
+    border-radius: 8px;
+}
+
+/* Nombre y precio del producto */
+.producto-nombre-claro,
+.producto-nombre-oscuro {
+    font-size: 18px;
+    font-weight: bold;
+    color: #333;
+}
+
+.producto-precio-claro,
+.producto-precio-oscuro {
+    font-size: 16px;
+    color: #FF7F32;
+    /* Color llamativo */
+    margin-bottom: 15px;
+}
+
+/* Botón de agregar al carrito */
+.boton-agregar {
+    background-color: #FF7F32;
+    color: white;
+    padding: 10px 20px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 16px;
+    transition: background-color 0.3s, transform 0.2s, box-shadow 0.3s ease-in-out;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+    position: relative;
+}
+
+.boton-agregar:hover {
+    background-color: #FF5E00;
+    transform: scale(1.1);
+    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.2);
+    animation: pulsar 0.4s ease-in-out infinite;
+}
+
+@keyframes pulsar {
+    0% {
+        transform: scale(1);
+    }
+
+    50% {
+        transform: scale(1.1);
+    }
+
+    100% {
+        transform: scale(1);
+    }
+}
+
+/* Estilos para el tema claro */
+body.body-claro {
+    background-color: #f9f9f9;
+    color: #333;
+}
+
+.titulo-claro {
+    color: #333;
+    text-align: center;
+    margin-top: 40px;
+    font-size: 36px;
+}
+
+.usuario-claro {
+    font-size: 18px;
+    text-align: center;
+    margin-top: 10px;
+}
+
+/* Estilos para el tema oscuro */
+body.body-oscuro {
+    background-color: #333;
+    color: #fff;
+}
+
+.titulo-oscuro {
+    color: #fff;
+    text-align: center;
+    margin-top: 40px;
+    font-size: 36px;
+}
+
+.usuario-oscuro {
+    font-size: 18px;
+    text-align: center;
+    margin-top: 10px;
+}
+
+.producto-nombre {
+    color: #fff;
+}
+
+/* Formulario de login */
+.form-login {
+    max-width: 400px;
+    margin: 40px auto;
+    padding: 30px;
+    background-color: #fff;
+    border-radius: 8px;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+    transition: box-shadow 0.3s ease;
+}
+
+.form-login:hover {
+    box-shadow: 0 8px 15px rgba(0, 0, 0, 0.15);
+}
+
+.div-login {
+    display: flex;
+    flex-direction: column;
+}
+
+/* Estilos para los campos de texto y contraseña */
+.input-claro,
+.input-oscuro {
+    padding: 12px;
+    margin: 10px 0;
+    border-radius: 5px;
+    border: 1px solid #ccc;
+    font-size: 16px;
+}
+
+.input-claro:focus,
+.input-oscuro:focus {
+    border-color: #FF7F32;
+    outline: none;
+}
+
+body.body-oscuro .input-oscuro {
+    border: 1px solid #666;
+}
+
+body.body-oscuro .input-oscuro:focus {
+    border-color: #28a745;
+}
+
+/* Estilo para las etiquetas */
+.label-claro,
+.label-oscuro {
+    font-size: 16px;
+    color: #333;
+}
+
+/* Botón de inicio de sesión */
+.boton-claro,
+.boton-oscuro {
+    width: 100%;
+    padding: 12px;
+    background-color: #FF7F32;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 16px;
+    margin-top: 10px;
+    transition: background-color 0.3s;
+}
+
+.boton-claro:hover,
+.boton-oscuro:hover {
+    background-color: #FF5E00;
+}
+
+/* Estilo para el mensaje de error */
+.error-claro,
+.error-oscuro {
+    color: red;
+    font-size: 16px;
+    background-color: #f9f9f9;
+    padding: 10px;
+    margin: 10px 0;
+    border-radius: 5px;
+}
+
+/* Carrito de compras */
+.carrito-tabla {
+    width: 80%;
+    margin: 40px auto;
+    border-collapse: collapse;
+    font-size: 16px;
+    text-align: left;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+}
+
+.carrito-tabla th,
+.carrito-tabla td {
+    padding: 12px 15px;
+    border: 1px solid #ddd;
+}
+
+.carrito-tabla th {
+    background-color: #f4f4f4;
+    font-weight: bold;
+}
+
+.carrito-tabla td {
+    background-color: #fff;
+}
+
+body.body-oscuro .carrito-tabla th {
+    background-color: #444;
+    color: #fff;
+}
+
+body.body-oscuro .carrito-tabla td {
+    background-color: #555;
+    color: #fff;
+}
+
+.carrito-tabla tfoot .carrito-total-label {
+    text-align: right;
+    font-weight: bold;
+}
+
+.carrito-tabla tfoot .carrito-total {
+    font-size: 18px;
+    font-weight: bold;
+    text-align: right;
+    background-color: #f9f9f9;
+}
+
+body.body-oscuro .carrito-tabla tfoot .carrito-total {
+    background-color: #333;
+    color: #fff;
+}
+
+/* Estilo para el botón de vaciar el carrito */
+.boton-vaciar {
+    background-color: #FF7F32;
+    color: white;
+    padding: 12px 25px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 16px;
+    transition: background-color 0.3s ease;
+    margin: 20px auto;
+    display: block;
+    width: 25%;
+}
+
+.boton-vaciar:hover {
+    background-color: #FF5E00;
+    /* Color más oscuro al pasar el ratón */
+}
+
+.carrito-vacio {
+    width: 100%;
+    text-align: center;
+}
+
+.enlace-volver {
+    text-decoration: none;
+    font-size: 16px;
+    color: #FF7F32;
+    display: inline-block;
+    font-weight: bold;
+    transition: color 0.3s ease;
+    text-align: center;
+}
+
+/* Preferencias */
+.form-preferencias {
+    max-width: 400px;
+    margin: 20px auto;
+    padding: 30px;
+    background-color: #fff;
+    border-radius: 10px;
+    box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.1);
+}
+
+.label-claro,
+.label-oscuro {
+    font-size: 16px;
+    color: #333;
+}
+
+.select-claro,
+.select-oscuro,
+.boton-claro,
+.boton-oscuro {
+    width: 100%;
+    padding: 10px;
+    margin: 10px 0;
+    border-radius: 5px;
+    border: 1px solid #ccc;
+}
+
+.boton-claro {
+    background-color: #FF7F32;
+    color: white;
+}
+
+.boton-claro:hover {
+    background-color: #FF5E00;
+}
+
+.boton-oscuro {
+    background-color: #28a745;
+    color: white;
+}
+
+.boton-oscuro:hover {
+    background-color: #218838;
+}
+
+.enlace-claro,
+.enlace-oscuro {
+    display: inline-block;
+    margin: 10px 0;
+    text-decoration: none;
+    font-size: 16px;
+    color: #FF7F32;
+}
+
+.enlace-claro:hover,
+.enlace-oscuro:hover {
+    text-decoration: underline;
+}
+
+/* Footer pegado al fondo */
+.footer {
+    background-color: #222;
+    color: #fff;
+    text-align: center;
+    padding: 20px 10px;
+    margin-top: auto;
+    box-shadow: 0 -2px 5px rgba(0, 0, 0, 0.1);
+}
+
+.footer-text {
+    margin: 0;
+    font-size: 14px;
+}
+
+.footer-socials {
+    margin-top: 10px;
+}
+
+.footer-link {
+    margin: 0 10px;
+    text-decoration: none;
+    color: #fff;
+    font-size: 24px;
+    transition: color 0.3s ease, transform 0.3s ease;
+}
+
+.footer-link:hover {
+    color: #FF7F32;
+    transform: scale(1.2);
+}
