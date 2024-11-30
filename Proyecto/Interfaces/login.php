@@ -1,24 +1,32 @@
 <?php
 
+// Inicia la sesión
 session_start();
 
-// Cargar preferencias
+// Carga las preferencias de idioma y estilo desde las cookies, con valores predeterminados
 $idioma = isset($_COOKIE['idioma']) ? $_COOKIE['idioma'] : 'es';  // Español por defecto
 $estilo = isset($_COOKIE['estilo']) ? $_COOKIE['estilo'] : 'claro'; // Claro por defecto
 
+// Se inicializa la variable de error
 $error = '';
 
+// Se procesa el formulario de inicio de sesión
 if ($_SERVER['REQUEST_METHOD'] == 'POST') {
+
+    // Se validan las credenciales del administrador
     if ($_POST['username'] == 'admin' && $_POST['password'] == '1234') {
-        $_SESSION['usuario'] = 'admin';
-        header("Location: ../index.php");
+        $_SESSION['usuario'] = 'admin'; // Guardar el usuario como administrador
+        header("Location: ../index.php"); // Redirigir al índice
         exit;
+
+    // Se validan las credenciales del usuario genérico
     } elseif (!empty($_POST['username']) && !empty($_POST['password'])) {
-        $_SESSION['usuario'] = 'usuario';
-        header("Location: ../index.php");
+        $_SESSION['usuario'] = $_POST['username']; // Guardar el usuario como genérico
+        header("Location: ../index.php"); // Redirigir al índice
         exit;
     } else {
-        $error = 'Credenciales inválidas.';
+        // Se guarda el mensaje de error si las credenciales son inválidas
+        $error = $idioma === 'es' ? 'Credenciales inválidas.' : 'Invalid credentials.';
     }
 }
 
@@ -43,13 +51,17 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
         </nav>
     </header>
 
+    <!-- Contenido principal -->
     <main class="content">
+        <!-- Título del formulario de inicio de sesión -->
         <h1 class="titulo-<?php echo $estilo; ?>"><?php echo $idioma === 'es' ? 'Iniciar Sesión' : 'Log In'; ?></h1>
 
+        <!-- Se muestra el mensaje de error si las credenciales son inválidas -->
         <?php if ($error): ?>
             <p class="error-<?php echo $estilo; ?>"><?php echo $error; ?></p>
         <?php endif; ?>
 
+        <!-- Formulario de inicio de sesión -->
         <form method="POST" class="form-login">
             <div class="div-login">
                 <label for="username" class="label-<?php echo $estilo; ?>"><?php echo $idioma === 'es' ? 'Usuario' : 'Username'; ?>:</label>

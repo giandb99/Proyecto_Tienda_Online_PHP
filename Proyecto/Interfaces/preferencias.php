@@ -1,18 +1,20 @@
 <?php
 
-// Verificar si se envió el formulario
+// Verifica si se envió el formulario
 if ($_SERVER['REQUEST_METHOD'] == 'POST') {
-    // Guardar las preferencias de idioma y estilo en las cookies
+
+    // Guarda las preferencias de idioma y estilo en las cookies
     setcookie('idioma', $_POST['idioma'], time() + 3600, '/'); // Cookie de idioma
     setcookie('estilo', $_POST['estilo'], time() + 3600, '/'); // Cookie de estilo
-    // Redirigir para aplicar las nuevas preferencias
+
+    // Redirige a la misma página para aplicar las nuevas preferencias
     header("Location: preferencias.php");
-    exit;
+    exit; // Detiene la ejecución del script para asegurar que no se ejecuta código adicional
 }
 
-// Cargar las preferencias desde las cookies o usar valores predeterminados
+// Carga las preferencias desde las cookies o usa valores predeterminados si no existen
 $idioma = isset($_COOKIE['idioma']) ? $_COOKIE['idioma'] : 'es';  // Español por defecto
-$estilo = isset($_COOKIE['estilo']) ? $_COOKIE['estilo'] : 'claro'; // Claro por defecto
+$estilo = isset($_COOKIE['estilo']) ? $_COOKIE['estilo'] : 'claro'; // Tema claro por defecto
 
 ?>
 
@@ -32,6 +34,8 @@ $estilo = isset($_COOKIE['estilo']) ? $_COOKIE['estilo'] : 'claro'; // Claro por
             <img src="../Imagenes/store-4156934_640.png" alt="Logo" class="nav-logo">
             <a href="../index.php" class="enlace-volver"><?php echo $idioma === 'es' ? 'Volver a la tienda' : 'Return to store'; ?></a>
             <a href="carrito.php" class="nav-link"><?php echo $idioma === 'es' ? 'Ver Carrito' : 'View Cart'; ?></a>
+
+            <!-- Muestra "Cerrar Sesión" si el usuario está logueado, sino "Iniciar Sesión" -->
             <?php if (isset($_SESSION['usuario'])): ?>
                 <a href="logout.php" class="nav-link"><?php echo $idioma === 'es' ? 'Cerrar Sesión' : 'Log Out'; ?></a>
             <?php else: ?>
@@ -39,22 +43,32 @@ $estilo = isset($_COOKIE['estilo']) ? $_COOKIE['estilo'] : 'claro'; // Claro por
             <?php endif; ?>
         </nav>
     </header>
+
+    <!-- Contenido principal -->
     <main class="content">
+        <!-- Título principal -->
         <h1 class="titulo-<?php echo $estilo; ?>"><?php echo $idioma === 'es' ? 'Preferencias' : 'Preferences'; ?></h1>
 
+        <!-- Formulario para seleccionar preferencias -->
         <form method="POST" class="form-preferencias">
+
+            <!-- Campo para seleccionar el idioma -->
             <label for="idioma" class="label-<?php echo $estilo; ?>"><?php echo $idioma === 'es' ? 'Idioma' : 'Language'; ?>:</label>
             <select name="idioma" id="idioma" class="select-<?php echo $estilo; ?>">
                 <option value="es" <?php echo $idioma == 'es' ? 'selected' : ''; ?>>Español</option>
                 <option value="en" <?php echo $idioma == 'en' ? 'selected' : ''; ?>>English</option>
             </select>
             <br>
+
+            <!-- Campo para seleccionar el estilo -->
             <label for="estilo" class="label-<?php echo $estilo; ?>"><?php echo $idioma === 'es' ? 'Estilo' : 'Style'; ?>:</label>
             <select name="estilo" id="estilo" class="select-<?php echo $estilo; ?>">
                 <option value="claro" <?php echo $estilo == 'claro' ? 'selected' : ''; ?>><?php echo $idioma === 'es' ? 'Claro' : 'Light'; ?></option>
                 <option value="oscuro" <?php echo $estilo == 'oscuro' ? 'selected' : ''; ?>><?php echo $idioma === 'es' ? 'Oscuro' : 'Dark'; ?></option>
             </select>
             <br>
+
+            <!-- Botón para guardar preferencias -->
             <button type="submit" class="boton-<?php echo $estilo; ?>"><?php echo $idioma === 'es' ? 'Guardar' : 'Save'; ?></button>
         </form>
     </main>

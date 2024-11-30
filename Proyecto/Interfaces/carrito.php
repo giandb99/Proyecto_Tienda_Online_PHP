@@ -1,18 +1,20 @@
 <?php
 
+// Inicia la sesión
 session_start();
 
-// Cargar preferencias de idioma y estilo desde las cookies
+// Carga las preferencias de idioma y estilo desde las cookies, con valores predeterminados
 $idioma = isset($_COOKIE['idioma']) ? $_COOKIE['idioma'] : 'es';  // Español por defecto
 $estilo = isset($_COOKIE['estilo']) ? $_COOKIE['estilo'] : 'claro'; // Claro por defecto
 
+// Obtiene el carrito desde la sesión; se inicializa como vacío si no existe
 $carrito = isset($_SESSION['carrito']) ? $_SESSION['carrito'] : [];
 $total = 0;
 
-// Lógica para vaciar el carrito
+// Verifica si se solicitó vaciar el carrito
 if (isset($_POST['vaciar_carrito'])) {
-    unset($_SESSION['carrito']);
-    header("Location: carrito.php"); // Redirigir para aplicar los cambios
+    unset($_SESSION['carrito']); // Eliminar el carrito de la sesión
+    header("Location: carrito.php"); // Redirigir para actualizar la vista
     exit;
 }
 
@@ -29,11 +31,14 @@ if (isset($_POST['vaciar_carrito'])) {
 </head>
 
 <body class="body-<?php echo $estilo; ?>">
+    <!-- Encabezado con barra de navegación -->
     <header class="header">
         <nav class="nav">
             <img src="../Imagenes/store-4156934_640.png" alt="Logo" class="nav-logo">
             <a href="../index.php" class="enlace-volver"><?php echo $idioma === 'es' ? 'Volver a la tienda' : 'Return to store'; ?></a>
             <a href="preferencias.php" class="nav-link"><?php echo $idioma === 'es' ? 'Preferencias' : 'Preferences'; ?></a>
+            
+            <!-- Muestra "Cerrar Sesión" si el usuario está logueado, sino "Iniciar Sesión" -->
             <?php if (isset($_SESSION['usuario'])): ?>
                 <a href="logout.php" class="nav-link"><?php echo $idioma === 'es' ? 'Cerrar Sesión' : 'Log Out'; ?></a>
             <?php else: ?>
@@ -42,12 +47,17 @@ if (isset($_POST['vaciar_carrito'])) {
         </nav>
     </header>
 
+    <!-- Contenido principal -->
     <main class="content">
+        <!-- Título del carrito -->
         <h1 class="titulo-<?php echo $estilo; ?>"><?php echo $idioma === 'es' ? 'Carrito de Compras' : 'Shopping Cart'; ?></h1>
 
+        <!-- Verifica si el carrito está vacío -->
         <?php if (empty($_SESSION['carrito'])): ?>
             <p class="carrito-vacio"><?php echo $idioma === 'es' ? 'El carrito está vacío.' : 'The cart is empty.'; ?></p>
         <?php else: ?>
+
+            <!-- Tabla de productos del carrito -->
             <table class="carrito-tabla">
                 <thead>
                     <tr>
@@ -57,7 +67,9 @@ if (isset($_POST['vaciar_carrito'])) {
                         <th><?php echo $idioma === 'es' ? 'Subtotal' : 'Subtotal'; ?></th>
                     </tr>
                 </thead>
+
                 <tbody>
+                    <!-- Mostrar productos del carrito -->
                     <?php foreach ($_SESSION['carrito'] as $producto): ?>
                         <tr>
                             <td><?php echo $producto['nombre']; ?></td>
@@ -68,7 +80,9 @@ if (isset($_POST['vaciar_carrito'])) {
                         <?php $total += $producto['precio'] * $producto['cantidad']; ?>
                     <?php endforeach; ?>
                 </tbody>
+
                 <tfoot>
+                    <!-- Total del carrito -->
                     <tr>
                         <td colspan="3" class="carrito-total-label"><?php echo $idioma === 'es' ? 'Total' : 'Total'; ?>:</td>
                         <td class="carrito-total">$<?php echo $total; ?></td>
